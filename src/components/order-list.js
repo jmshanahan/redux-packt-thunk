@@ -9,7 +9,7 @@ import {
 class OrderList extends Component {
   pushItemsAsOrder = () => {
     this.props.submitOrder({
-      customer: this.props.customers.find(c => c.selected).id,
+      customer: this.props.customers.list.find(c => c.selected).id,
       time: new Date().toLocaleDateString(),
       list: this.props.orders
     });
@@ -70,8 +70,8 @@ OrderList.propTypes = {
 };
 const mapStateToProps = state => ({
   orders: state.orders,
-  customers: state.customers,
-  selectedCustomer: state.customers.find(c => c.selected)
+  customers: state.customers.list,
+  selectedCustomer: state.customers.list.find(c => c.selected)
 });
 export default connect(mapStateToProps, {
   deleteOrder,

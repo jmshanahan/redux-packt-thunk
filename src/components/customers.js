@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { markCustomerAsSelected } from "../actions/customersActions";
+import {
+  markCustomerAsSelected,
+  fetchCustomers
+} from "../actions/customersActions";
 class Customers extends Component {
+  componentDidMount = () => {
+    this.props.fetchCustomers();
+  };
   markAsSelected = e => {
     this.props.markCustomerAsSelected(
       parseInt(e.target.getAttribute("data-id"))
@@ -12,6 +18,7 @@ class Customers extends Component {
     const { customers } = this.props;
     return (
       <div>
+        {this.props.isFetching ? "Loading Customers..." : ""}
         {customers.map(customer => (
           <div
             className={"customer-card " + (customer.selected ? "selected" : "")}
@@ -35,8 +42,9 @@ class Customers extends Component {
   }
 }
 const mapStateToProps = state => ({
-  customers: state.customers,
+  isFetching: state.customers.isFetching,
+  customers: state.customers.list,
   backlog: state.backlog
 });
-const mapDispatchToProps = { markCustomerAsSelected };
+const mapDispatchToProps = { markCustomerAsSelected, fetchCustomers };
 export default connect(mapStateToProps, mapDispatchToProps)(Customers);

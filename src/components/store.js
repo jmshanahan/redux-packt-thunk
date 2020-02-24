@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import rootReducer from "../reducers";
 
 // function logger(store) {
@@ -20,16 +21,13 @@ let logger = store => next => action => {
   console.groupEnd();
   return result;
 };
-let FooLogger = store => next => action => {
-  console.log("Foo");
-  next(action);
-};
+// let FooLogger = store => next => action => {
+//   console.log("Foo");
+//   next(action);
+// };
 const store = createStore(
   rootReducer,
-  compose(
-    applyMiddleware(logger, FooLogger),
-    window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  compose(applyMiddleware(logger, thunk), window.__REDUX_DEVTOOLS_EXTENSION__())
 );
 // logger(store)(nextMiddleware)(addOrder({ order: "Tea", amount: 2 }));
 export default store;
