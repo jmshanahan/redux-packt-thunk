@@ -9,7 +9,7 @@ import {
 class OrderList extends Component {
   pushItemsAsOrder = () => {
     this.props.submitOrder({
-      customer: this.props.customers.list.find(c => c.selected).id,
+      customer: this.props.customers.find(c => c.selected).id,
       time: new Date().toLocaleDateString(),
       list: this.props.orders
     });

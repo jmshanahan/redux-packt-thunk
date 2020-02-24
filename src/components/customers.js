@@ -15,11 +15,10 @@ class Customers extends Component {
     );
   };
   render() {
-    const { customers } = this.props;
     return (
       <div>
         {this.props.isFetching ? "Loading Customers..." : ""}
-        {customers.map(customer => (
+        {this.props.customers.map(customer => (
           <div
             className={"customer-card " + (customer.selected ? "selected" : "")}
             key={customer.id}

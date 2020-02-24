@@ -24,7 +24,7 @@ const customersReducer = (state = initialState, action) => {
     case RESET_AFTER_SUBMIT:
       let nextState = [...state.list];
       nextState.forEach(c => (c.selected = false));
-      return nextState;
+      return { ...state, list: nextState };
     case FETCH_CUSTOMERS_START:
       return { ...state, isFetching: true };
     case FETCH_CUSTOMERS_SUCCESS:
