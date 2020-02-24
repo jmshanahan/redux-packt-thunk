@@ -7,7 +7,7 @@ import {
 } from "../actions/customersActions";
 class Customers extends Component {
   componentDidMount = () => {
-    this.props.fetchCustomers();
+    if (!this.props.customers.length) this.props.fetchCustomers();
   };
   markAsSelected = e => {
     this.props.markCustomerAsSelected(
